@@ -4,6 +4,16 @@ import java.util.HashMap;
 import java.util.*;
 
 public class EquationSolver {
+	String equation;
+	HashMap<Integer, Double> numbers = new HashMap<Integer, Double>();
+	HashMap<Character, Double> variables = new HashMap<Character, Double>();
+	HashMap<Integer, Integer> brackets = new HashMap<Integer, Integer>();
+	Set<Character> operators = new HashSet<Character>{'+', '-', '*', '/', '^'};
+	operator.add('+');
+	operator.add('-');
+	operator.add('*');
+	operator.add('/');
+	operator.add('^');
 
     public double operate(){
         map_variables();
