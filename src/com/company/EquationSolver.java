@@ -95,7 +95,7 @@ public class EquationSolver {
         for (int i = 0; i < equation.length(); i++) {
             if ((equation.charAt(i) >= '0' && equation.charAt(i) <= '9') || equation.charAt(i) == '-'
                     || equation.charAt(i) == '+') {
-                map_number(i, formated_equation);;
+                i = map_number(i, formated_equation);;
             } else {
                 formated_equation.append(equation.charAt(i));
             }
@@ -103,20 +103,20 @@ public class EquationSolver {
         equation = formated_equation;
     }
 
-    public void map_number(Integer i, StringBuilder formated_equation) {
+    public Integer map_number(Integer i, StringBuilder formated_equation) {
 
         if (this.equation.charAt(i) == '+') {
             if (i - 1 >= 0 && !this.operators.contains(this.equation.charAt(i - 1))) {
                 formated_equation.append('+');
             }
-            return;
+            return i;
         }
 
         int j = 0;
         if (this.equation.charAt(i) == '-') {
             if (i - 1 >= 0 && !this.operators.contains(this.equation.charAt(i - 1))) {
                 formated_equation.append('-');
-                return ;
+                return i;
             }
             j++;
         }
@@ -132,6 +132,8 @@ public class EquationSolver {
 
         formated_equation.append('?');
         i += j - 1;
+
+        return i;
     }
 
     public void map_brackets() throws IllegalArgumentException {
