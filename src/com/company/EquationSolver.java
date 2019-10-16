@@ -5,7 +5,7 @@ import java.util.*;
 public class EquationSolver {
     private StringBuilder equation = new StringBuilder();
 
-	double solve (int l, int r) {
+	 double solve (int l, int r) {
 		if (brackets.containsKey(l) && brackets[l] == r) {
 			return solve(l + 1, r - 1);
 		}
@@ -68,7 +68,20 @@ public class EquationSolver {
             i = j-1;
         }
         equation = simplified_equation;
+        
     }
+      
+    public void format_equation(){
+        StringBuilder formated_equation = new StringBuilder();
+        for(int i = 0; i<equation.size(); i++){
+            if((equation.charAt(i) >= '0' && equation.charAt(i) <= '9') || equation.charAt(i) == '-' || equation.charAt(i) == '+') {
+                map_number(i, formated_equation);
+            }
+            else{
+                formated_equation.append(equation.charAt(i));
+            }
+        }
+        equation = formated_equation.toString();
    
    public void map_brackets() throws IllegalArgumentException {
      Stack bracket_stack = new Stack();
