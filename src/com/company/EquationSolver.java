@@ -73,20 +73,20 @@ public class EquationSolver {
    public void map_brackets() throws IllegalArgumentException {
      Stack bracket_stack = new Stack();
      for (int i = 0; i < this.equation.length(); i++) {
-        char x = equation[i];
+        char x = this.equation[i];
         if (x == '(') {
             bracket_stack.push(i);
         }
         else if (x == ')') {
             if(bracket_stack.empty()) {
-                throw new IllegalArgumentException("Parenthesis of equation " + equation + " are not balanced");
+                throw new IllegalArgumentException("Parenthesis of equation " + this.equation + " are not balanced");
             }
             brackets[new Integer(bracket_stack.peek())] = i;
             bracket_stack.pop();
         }
     }
     if (!bracket_stack.empty()) {
-        throw new IllegalArgumentException("Parenthesis of equation " + equation + " are not balanced");
+        throw new IllegalArgumentException("Parenthesis of equation " + this.equation + " are not balanced");
     }
-  }    
+  } 
 }
