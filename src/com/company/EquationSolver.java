@@ -4,25 +4,24 @@ import java.util.HashMap;
 import java.util.*;
 
 public class EquationSolver {
-	String equation;
+    private StringBuilder equation = new StringBuilder();
 	HashMap<Integer, Double> numbers = new HashMap<Integer, Double>();
 	HashMap<Character, Double> variables = new HashMap<Character, Double>();
 	HashMap<Integer, Integer> brackets = new HashMap<Integer, Integer>();
 	Set<Character> operators = new HashSet<Character>{'+', '-', '*', '/', '^'};
-	operator.add('+');
-	operator.add('-');
-	operator.add('*');
-	operator.add('/');
-	operator.add('^');
+	operators.add('+');
+	operators.add('-');
+	operators.add('*');
+	operators.add('/');
+	operators.add('^');
 
     public double operate(){
-        map_variables();
         simplify_sign();
         format_equation();
         map_brackets();
         return solve(0, equation.length() - 1);
     }
-    private StringBuilder equation = new StringBuilder();
+
 
 	 double solve (int l, int r) {
 		if (brackets.containsKey(l) && brackets[l] == r) {
@@ -36,10 +35,10 @@ public class EquationSolver {
 		HashMap<Character, Integer> op_pos = new HashMap();
 		for(int i = l; i <= r; i++){
 			if(equation.charAt(i) == '('){
-				i = brackets.charAt(i);
+				i = brackets[i];
 				continue;
 			}
-			if(operators.find(equation.charAt(i)) != operators.end()){
+			if(operators.contains(equation.charAt(i)){
 				op_pos[equation.charAt(i)] = i;
 			}
 		}
