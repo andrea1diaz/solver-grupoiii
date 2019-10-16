@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.*;
 
 public class EquationSolver {
-    private StringBuilder equation = new StringBuilder();
+    private StringBuilder equation;
 	HashMap<Integer, Double> numbers = new HashMap<Integer, Double>();
 	HashMap<Character, Double> variables = new HashMap<Character, Double>();
 	HashMap<Integer, Integer> brackets = new HashMap<Integer, Integer>();
-	Set<Character> operators = new HashSet<Character>{'+', '-', '*', '/', '^'};
-	operators.add('+');
-	operators.add('-');
-	operators.add('*');
-	operators.add('/');
-	operators.add('^');
+	Set<Character> operators = new HashSet<Character>(Arrays.asList('+', '-', '/', '*', '^'));
+
+
+	public EquationSolver(String str){
+	    equation = new StringBuilder(str);
+    }
 
     public double operate(){
-        simplify_sign();
+    simplify_sign();
         format_equation();
         map_brackets();
         return solve(0, equation.length() - 1);
@@ -38,7 +38,7 @@ public class EquationSolver {
 				i = brackets[i];
 				continue;
 			}
-			if(operators.contains(equation.charAt(i)){
+			if(operators.contains(equation.charAt(i))){
 				op_pos[equation.charAt(i)] = i;
 			}
 		}
@@ -102,7 +102,7 @@ public class EquationSolver {
         equation = formated_equation.toString();
     }
 
-    public void map_number(int i, string formated_equation) {
+    public void map_number(int i, String formated_equation) {
         // void map_number(int &i, string &formated_equation)
 
         if (this.equation.charAt(i) == '+') {
