@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.HashMap;
 import java.util.*;
 
 public class EquationSolver {
@@ -22,14 +23,14 @@ public class EquationSolver {
 			return numbers[l];
 		}
 
-		HashMap<Character, Integer> op_pos;
+		HashMap<Character, Integer> op_pos = new HashMap();
 		for(int i = l; i <= r; i++){
-			if(equation[i] == '('){
-				i = brackets[i];
+			if(equation.charAt(i) == '('){
+				i = brackets.charAt(i);
 				continue;
 			}
-			if(operators.find(equation[i]) != operators.end()){
-				op_pos[equation[i]] = i;
+			if(operators.find(equation.charAt(i)) != operators.end()){
+				op_pos[equation.charAt(i)] = i;
 			}
 		}
 
