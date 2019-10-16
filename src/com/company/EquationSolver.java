@@ -3,6 +3,8 @@ package com.company;
 import java.util.HashMap;
 import java.util.*;
 
+import static java.lang.Math.pow;
+
 public class EquationSolver {
     private StringBuilder equation;
 	HashMap<Integer, Double> numbers = new HashMap<Integer, Double>();
@@ -24,18 +26,18 @@ public class EquationSolver {
 
 
 	 double solve (int l, int r) {
-		if (brackets.containsKey(l) && brackets[l] == r) {
+		if (brackets.containsKey(l) && brackets.get(l) == r) {
 			return solve(l + 1, r - 1);
 		}
 
 		if(l == r){
-			return numbers[l];
+			return numbers.get(l);
 		}
 
 		HashMap<Character, Integer> op_pos = new HashMap();
 		for(int i = l; i <= r; i++){
 			if(equation.charAt(i) == '('){
-				i = brackets[i];
+				i = brackets.get(i);
 				continue;
 			}
 			if(operators.contains(equation.charAt(i))){
@@ -44,19 +46,19 @@ public class EquationSolver {
 		}
 
 		if(op_pos.containsKey('+')){
-			return solve(l, op_pos['+'] - 1) + solve(op_pos['+'] + 1, r);
+			return solve(l, op_pos.get('+') - 1) + solve(op_pos.get('+') + 1, r);
 		}
 		if(op_pos.containsKey('-')){
-			return solve(l, op_pos['-']-1) - solve(op_pos['-']+1, r);
+			return solve(l, op_pos.get('-')-1) - solve(op_pos.get('-')+1, r);
 		}
 		if(op_pos.containsKey('*')){
-			return solve(l, op_pos['*']-1) * solve(op_pos['*']+1, r);
+			return solve(l, op_pos.get('*')-1) * solve(op_pos.get('*')+1, r);
 		}
 		if(op_pos.containsKey('/')){
-			return solve(l, op_pos['/']-1) / solve(op_pos['/']+1, r);
+			return solve(l, op_pos.get('/')-1) / solve(op_pos.get('/')+1, r);
 		}
 		if(op_pos.containsKey('^')){
-			return pow(solve(l, op_pos['^']-1), solve(op_pos['^']+1, r));
+			return pow(solve(l, op_pos.get('^')-1), solve(op_pos.get('^')+1, r));
 		}
 
 		return 0;
@@ -91,7 +93,7 @@ public class EquationSolver {
       
     public void format_equation() {
         StringBuilder formated_equation = new StringBuilder();
-        for (int i = 0; i < equation.size(); i++) {
+        for (int i = 0; i < equation.length(); i++) {
             if ((equation.charAt(i) >= '0' && equation.charAt(i) <= '9') || equation.charAt(i) == '-'
                     || equation.charAt(i) == '+') {
                 map_number(i, formated_equation);
@@ -103,7 +105,6 @@ public class EquationSolver {
     }
 
     public void map_number(int i, String formated_equation) {
-        // void map_number(int &i, string &formated_equation)
 
         if (this.equation.charAt(i) == '+') {
             if (i - 1 >= 0 && !this.operators.contains(this.equation.charAt(i - 1))) {
@@ -137,7 +138,7 @@ public class EquationSolver {
     public void map_brackets() throws IllegalArgumentException {
      Stack bracket_stack = new Stack();
      for (int i = 0; i < this.equation.length(); i++) {
-        char x = this.equation[i];
+        char x = this.equation.charAt(i);
         if (x == '(') {
             bracket_stack.push(i);
         }
