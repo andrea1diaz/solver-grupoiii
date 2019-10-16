@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.HashMap;
 import java.util.*;
-
 import static java.lang.Math.pow;
 
 public class EquationSolver {
@@ -41,7 +40,7 @@ public class EquationSolver {
 				continue;
 			}
 			if(operators.contains(equation.charAt(i))){
-				op_pos[equation.charAt(i)] = i;
+				op_pos.put(equation.charAt(i), i);
 			}
 		}
 
@@ -96,19 +95,19 @@ public class EquationSolver {
         for (int i = 0; i < equation.length(); i++) {
             if ((equation.charAt(i) >= '0' && equation.charAt(i) <= '9') || equation.charAt(i) == '-'
                     || equation.charAt(i) == '+') {
-                map_number(i, formated_equation);
+                map_number(i, formated_equation);;
             } else {
                 formated_equation.append(equation.charAt(i));
             }
         }
-        equation = formated_equation.toString();
+        equation = formated_equation;
     }
 
-    public void map_number(int i, String formated_equation) {
+    public void map_number(int i, StringBuilder formated_equation) {
 
         if (this.equation.charAt(i) == '+') {
             if (i - 1 >= 0 && !this.operators.contains(this.equation.charAt(i - 1))) {
-                formated_equation += '+';
+                formated_equation.append('+');
             }
             return;
         }
@@ -116,7 +115,7 @@ public class EquationSolver {
         int j = 0;
         if (this.equation.charAt(i) == '-') {
             if (i - 1 >= 0 && !this.operators.contains(this.equation.charAt(i - 1))) {
-                formated_equation += '-';
+                formated_equation.append('-');
                 return ;
             }
             j++;
@@ -131,7 +130,7 @@ public class EquationSolver {
         double number = Double.parseDouble(this.equation.substring(i, j));
         this.numbers.put(formated_equation.length(), number);
 
-        formated_equation += '?';
+        formated_equation.append('?');
         i += j - 1;
     }
 
@@ -146,7 +145,7 @@ public class EquationSolver {
             if(bracket_stack.empty()) {
                 throw new IllegalArgumentException("Parenthesis of equation " + this.equation + " are not balanced");
             }
-            brackets[new Integer(bracket_stack.peek())] = i;
+            brackets.put((Integer) bracket_stack.peek(), i);
             bracket_stack.pop();
         }
     }
