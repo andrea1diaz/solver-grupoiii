@@ -103,7 +103,7 @@ public class EquationSolver {
         equation = formated_equation;
     }
 
-    public void map_number(int i, StringBuilder formated_equation) {
+    public void map_number(Integer i, StringBuilder formated_equation) {
 
         if (this.equation.charAt(i) == '+') {
             if (i - 1 >= 0 && !this.operators.contains(this.equation.charAt(i - 1))) {
